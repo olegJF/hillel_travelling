@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Населені пункти{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        {% for object in objects_list %}
+            <p>{{object.name}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
