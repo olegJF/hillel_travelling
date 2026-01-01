@@ -4,10 +4,13 @@
 <h1>Населені пункти</h1>
 <div class="row">
     <div class="col">
-        {% for object in objects_list %}
+        {% for object in object_list %}
+        <a href="{% url 'cities:detail' pk=object.id%}">
             <p>{{object.name}}</p>
+        </a>
         {% endfor %}
     </div>
 </div>
+
 {% endblock %}
 
