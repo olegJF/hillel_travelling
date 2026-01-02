@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 
+from cities.forms import CityForm
 from cities.models import City
 
 __all__ = (
@@ -10,12 +11,15 @@ __all__ = (
 
 
 def home(request, pk=None):
-    if pk:
-        city = get_object_or_404(City, id=pk)
-        context = {'object': city}
-        return render(request, 'cities/detail.html', context)
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        if form.is_valid():
+            form.save()
+        qs = City.objects.all()
+        context = {'object_list': qs, 'form': CityForm()}
+        return render(request, 'cities/home.html', context)
     qs = City.objects.all()
-    context = {'objects_list': qs}
+    context = {'object_list': qs, 'form': CityForm()}
     return render(request, 'cities/home.html', context)
 
 
