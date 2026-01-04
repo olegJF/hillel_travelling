@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -23,13 +24,18 @@ def home(request, pk=None):
         context = {'object_list': qs, 'form': CityForm()}
         return render(request, 'cities/home.html', context)
     qs = City.objects.all()
-    context = {'object_list': qs, 'form': CityForm()}
+    paginator = Paginator(qs, 2)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj, 'form': CityForm()}
     return render(request, 'cities/home.html', context)
 
 
 class CityListView(ListView):
     model = City
     template_name = 'cities/home.html'
+    paginate_by = 2
 
 
 class CityDetailView(DetailView):
