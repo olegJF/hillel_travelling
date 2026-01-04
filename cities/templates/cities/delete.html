@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Видалення міста{% endblock %}
+{% block content %}
+<h1>Видалення міста</h1>
+
+<h4>Ви дійсно бажаєте видалити {{object}}</h4>
+
+{% include 'form.html' with text='Видалити' klass='danger'%}
+
+{% endblock %}
+

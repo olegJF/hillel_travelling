@@ -2,7 +2,7 @@
     <div class="col-md-4">
         <form action="{{ action }}" method="post"> {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-outline-primary">{{text}}</button>
+            <button type="submit" class="btn btn-outline-{% if klass%}{{klass}}{% else %}primary{% endif %}">{{text}}</button>
         </form>
     </div>
 </div>
