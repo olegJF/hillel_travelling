@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
@@ -18,6 +19,21 @@ class Train(models.Model):
         'cities.City', on_delete=models.CASCADE, related_name='to_city_set',
         verbose_name='До якого міста'
     )
+
+    def clean(self):
+        if self.from_city == self.to_city:
+            raise ValidationError(
+                'Потяг не може приходити до того міста з якого вийшов')
+        qs = Train.objects.filter(
+            from_city=self.from_city, to_city=self.to_city,
+            travel_time=self.travel_time).exclude(pk=self.pk)
+        if qs.exists():
+            raise ValidationError(
+                'Не може бути двох однакових поїздів з однаковим часом')
+
+    def save(self, **kwargs):
+        self.clean()
+        super().save(**kwargs)
 
 
     def __str__(self):
