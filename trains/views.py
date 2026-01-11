@@ -7,7 +7,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView,
 )
 
-# from trains.forms import TrainForm
+from trains.forms import TrainForm
 from trains.models import Train
 
 __all__ = (
@@ -30,21 +30,21 @@ class TrainDetailView(DetailView):
 class TrainCreateView(SuccessMessageMixin, CreateView):
     model = Train
     template_name = 'trains/create.html'
-    # form_class = TrainForm
+    form_class = TrainForm
     success_url = reverse_lazy('trains:home')
 
     def get_success_message(self, cleaned_data):
-        message = 'Поїзд {name} успішно створено'
+        message = 'Поїзд {number} успішно створено'
         return message.format(**cleaned_data)
 
 class TrainUpdateView(SuccessMessageMixin, UpdateView):
     model = Train
     template_name = 'trains/update.html'
-    # form_class = TrainForm
+    form_class = TrainForm
     success_url = reverse_lazy('trains:home')
 
     def get_success_message(self, cleaned_data):
-        message = 'Поїзд {name} успішно відредаговано'
+        message = 'Поїзд {number} успішно відредаговано'
         return message.format(**cleaned_data)
 
 
@@ -55,11 +55,11 @@ class TrainDeleteView(DeleteView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        success_message = self.get_success_message({'name': self.object.name})
+        success_message = self.get_success_message({'number': self.object.number})
         if success_message:
             messages.success(self.request, success_message)
         return response
 
     def get_success_message(self, cleaned_data):
-        message = 'Поїзд {name} успішно видалено'
+        message = 'Поїзд {number} успішно видалено'
         return message.format(**cleaned_data)
