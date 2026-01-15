@@ -11,14 +11,14 @@ class RouteForm(forms.Form):
         ))
     from_city = forms.ModelChoiceField(
         label='З якого міста', queryset=City.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control', })
+        widget=forms.Select(attrs={'class': 'form-control basic-single', })
     )
     to_city = forms.ModelChoiceField(
         label='До якого міста', queryset=City.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control', })
+        widget=forms.Select(attrs={'class': 'form-control basic-single', })
     )
     cities = forms.ModelMultipleChoiceField(
         label='Через міста', queryset=City.objects.all(),
         required=False,
-        widget=forms.SelectMultiple(attrs={'class': 'form-control', })
+        widget=forms.SelectMultiple(attrs={'class': 'form-control basic-multiple', })
     )
