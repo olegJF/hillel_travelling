@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Пошук маршруту</h1>
 
-{% include 'form.html' with text='Пошук'%}
+{% url 'find_routes' as action %}
+{% include 'form.html' with text='Пошук' action=action%}
 
 {% endblock %}
