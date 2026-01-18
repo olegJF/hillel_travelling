@@ -37,7 +37,7 @@ def home(request, pk=None):
 class CityListView(ListView):
     model = City
     template_name = 'cities/home.html'
-    paginate_by = 2
+    paginate_by = 10
 
 
 class CityDetailView(DetailView):

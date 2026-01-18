@@ -19,7 +19,7 @@ __all__ = (
 class TrainListView(ListView):
     model = Train
     template_name = 'trains/home.html'
-    paginate_by = 2
+    paginate_by = 10
 
 
 class TrainDetailView(DetailView):

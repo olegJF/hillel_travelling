@@ -6,6 +6,8 @@ from routes.forms import RouteForm
 
 __all__ = ('home', 'find_routes')
 
+from routes.utils import get_all_routes
+
 
 def home(request):
     form = RouteForm()
@@ -16,8 +18,12 @@ def find_routes(request):
     if request.method == 'POST':
         form = RouteForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            a = 1
+            try:
+                data = get_all_routes(request, form)
+            except ValueError as err:
+                messages.error(request, str(err))
+                return render(request, 'routes/home.html', {'form': form})
+            return render(request, 'routes/home.html', data)
         return render(request, 'routes/home.html', {'form': form})
     else:
         messages.error(request, 'Немає даних для пошуку')
