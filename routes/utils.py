@@ -16,21 +16,37 @@ def dfs_paths(graph, start, goal):
                     stack.append((next_, path + [next_]))
 
 
-def get_graph() -> dict:
+def get_graph(qs) -> dict:
     graph = {}
-    qs = Train.objects.all()
     for q in qs:
         graph.setdefault(q.from_city_id, set())
         graph[q.from_city_id].add(q.to_city_id)
     return graph
 
 def get_all_routes(request, form) -> dict:
-    graph = get_graph()
+    qs = Train.objects.all().order_by('travel_time')
+    graph = get_graph(qs)
     context = {'form': form}
     data = form.cleaned_data
     from_city = data['from_city']
     to_city = data['to_city']
     all_ways = list(dfs_paths(graph, from_city.id, to_city.id))
+    all_trains = {}
     if not all_ways:
         raise ValueError('Маршруту, що задовільняє цим вимогам не існує')
+    for q in qs:
+        all_trains.setdefault((q.from_city_id, q.to_city_id), [])
+        all_trains[(q.from_city_id, q.to_city_id)].append(q)
+    routes = []
+    for route in all_ways:
+        tmp = {'trains': [], 'total_time': 0}
+        for i in range(len(route) - 1):
+            train_list = all_trains[(route[i], route[i + 1])]
+            train = train_list[0]
+            tmp['trains'].append(train)
+            tmp['total_time'] += train.travel_time
+        routes.append(tmp)
+    context['routes'] = routes
+    context['from_city'] = from_city
+    context['to_city'] = to_city
     return context

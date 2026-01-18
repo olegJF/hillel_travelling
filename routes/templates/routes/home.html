@@ -2,6 +2,22 @@
 {% block title %}Пошук маршруту{% endblock %}
 {% block content %}
 <h1>Пошук маршруту</h1>
+{% if routes %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h3>Маршрут з {{from_city.name}} до {{to_city}}</h3>
+        {% for route in routes %}
+            <p>Час у дорозі {{route.total_time}}</p>
+            {% for train in route.trains %}
+                <p>
+                {{train.number}} з {{train.from_city}} до {{train.to_city}}
+                </p>
+            {% endfor %}
+        <p>--------------------</p>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% url 'find_routes' as action %}
 {% include 'form.html' with text='Пошук' action=action%}
