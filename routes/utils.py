@@ -30,10 +30,21 @@ def get_all_routes(request, form) -> dict:
     data = form.cleaned_data
     from_city = data['from_city']
     to_city = data['to_city']
+    cities = data['cities']
     all_ways = list(dfs_paths(graph, from_city.id, to_city.id))
     all_trains = {}
     if not all_ways:
         raise ValueError('Маршруту, що задовільняє цим вимогам не існує')
+    if cities:
+        cities_id = [city.id for city in cities]
+        tmp = []
+        for route in all_ways:
+            if all(city in route for city in cities_id):
+                tmp.append(route)
+        if not tmp:
+            raise ValueError('Маршрут через ці міста неможливий')
+        all_ways = tmp
+
     for q in qs:
         all_trains.setdefault((q.from_city_id, q.to_city_id), [])
         all_trains[(q.from_city_id, q.to_city_id)].append(q)
