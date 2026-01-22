@@ -5,15 +5,36 @@
 {% if routes %}
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <h3>Маршрут з {{from_city.name}} до {{to_city}}</h3>
+
+        <h3>Маршрут{% if routes|length != 1 %}и{% endif %}
+            з {{from_city.name}} до {{to_city}}
+        </h3>
+
         {% for route in routes %}
-            <p>Час у дорозі {{route.total_time}}</p>
+        {% if forloop.counter == 1%}
+            <div class="alert alert-info" role="alert">
+              Найкоротший маршрут
+            </div>
+        {% endif %}
+            <h5>Час у дорозі {{route.total_time}}</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Список поїздів</th>
+
+                </tr>
+              </thead>
+              <tbody>
             {% for train in route.trains %}
-                <p>
-                {{train.number}} з {{train.from_city}} до {{train.to_city}}
-                </p>
+                    <tr>
+                      <th scope="row">{{forloop.counter}}</th>
+                      <td>{{train.number}} з {{train.from_city}} до {{train.to_city}}</td>
+                    </tr>
             {% endfor %}
-        <p>--------------------</p>
+             </tbody>
+        </table>
+        <br><br>
         {% endfor %}
     </div>
 </div>
