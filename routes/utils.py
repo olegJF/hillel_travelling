@@ -31,6 +31,7 @@ def get_all_routes(request, form) -> dict:
     from_city = data['from_city']
     to_city = data['to_city']
     cities = data['cities']
+    expected_time = data['expected_time']
     all_ways = list(dfs_paths(graph, from_city.id, to_city.id))
     all_trains = {}
     if not all_ways:
@@ -56,8 +57,12 @@ def get_all_routes(request, form) -> dict:
             train = train_list[0]
             tmp['trains'].append(train)
             tmp['total_time'] += train.travel_time
-        routes.append(tmp)
-    context['routes'] = routes
+        if tmp['total_time'] <= expected_time:
+            routes.append(tmp)
+    if not routes:
+        raise ValueError('Маршрут за такий час неможливий')
+    sorted_list = sorted(routes, key=lambda dct: dct['total_time'])
+    context['routes'] = sorted_list
     context['from_city'] = from_city
     context['to_city'] = to_city
     return context

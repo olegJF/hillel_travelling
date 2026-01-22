@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Пошук маршруту{% endblock %}
 {% block content %}
-<h1>Пошук маршруту</h1>
+<h1 class="text-center">Пошук маршруту</h1>
 {% if routes %}
 <div class="row">
     <div class="col-md-8 mx-auto">
@@ -20,6 +20,11 @@
 {% endif %}
 
 {% url 'find_routes' as action %}
-{% include 'form.html' with text='Пошук' action=action%}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        {% include 'form.html' with text='Пошук' action=action%}
+    </div>
+</div>
+
 
 {% endblock %}
