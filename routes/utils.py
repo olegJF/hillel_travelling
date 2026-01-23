@@ -24,7 +24,7 @@ def get_graph(qs) -> dict:
     return graph
 
 def get_all_routes(request, form) -> dict:
-    qs = Train.objects.all().order_by('travel_time')
+    qs = Train.objects.all().order_by('travel_time').select_related('from_city', 'to_city')
     graph = get_graph(qs)
     context = {'form': form}
     data = form.cleaned_data
