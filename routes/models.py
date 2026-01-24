@@ -7,8 +7,8 @@ class Route(models.Model):
     name = models.CharField(
         max_length=10, unique=True, verbose_name='Назва маршруту'
     )
-    total_time = models.DecimalField(
-        max_digits=4, decimal_places=2, verbose_name='Час у дорозі'
+    total_time = models.DurationField(
+        verbose_name='Час у дорозі'
     )
     from_city = models.ForeignKey(
         'cities.City', on_delete=models.CASCADE, related_name='from_city_route',

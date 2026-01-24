@@ -7,8 +7,11 @@ class Train(models.Model):
     number = models.CharField(
         max_length=10, unique=True, verbose_name='Номер потягу'
     )
-    travel_time = models.DecimalField(
-        max_digits=4, decimal_places=2, verbose_name='Час у дорозі'
+    # travel_time = models.DecimalField(
+    #     max_digits=4, decimal_places=2, verbose_name='Час у дорозі'
+    # )
+    travel_time = models.DurationField(
+        verbose_name='Час у дорозі', null=True, blank=True
     )
     from_city = models.ForeignKey(
         'cities.City', on_delete=models.CASCADE, related_name='from_city_set',

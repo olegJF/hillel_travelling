@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from trains.models import Train
 
 
@@ -51,13 +53,13 @@ def get_all_routes(request, form) -> dict:
         all_trains[(q.from_city_id, q.to_city_id)].append(q)
     routes = []
     for route in all_ways:
-        tmp = {'trains': [], 'total_time': 0}
+        tmp = {'trains': [], 'total_time': timedelta(0)}
         for i in range(len(route) - 1):
             train_list = all_trains[(route[i], route[i + 1])]
             train = train_list[0]
             tmp['trains'].append(train)
             tmp['total_time'] += train.travel_time
-        if tmp['total_time'] <= expected_time:
+        if tmp['total_time'].seconds // 3600 <= expected_time:
             routes.append(tmp)
     if not routes:
         raise ValueError('Маршрут за такий час неможливий')
