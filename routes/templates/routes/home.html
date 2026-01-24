@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Пошук маршруту{% endblock %}
 {% block content %}
+{% load formatters %}
 <h1 class="text-center">Пошук маршруту</h1>
 {% if routes %}
 <div class="row">
@@ -14,7 +15,7 @@
                   Найкоротший маршрут
                 </div>
             {% endif %}
-            <h5>Час у дорозі {{route.total_time}}</h5>
+            <h5>Час у дорозі {{route.total_time|format_duration}}</h5>
             <table class="table">
                 <thead>
                     <tr>

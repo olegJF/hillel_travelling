@@ -9,8 +9,8 @@ class TrainForm(forms.ModelForm):
         label="Потяг", max_length=10, widget=forms.TextInput(
             attrs={'class': 'form-control', })
     )
-    travel_time = forms.DecimalField(
-        label='Час у дорозі', widget=forms.NumberInput(
+    travel_time = forms.DurationField(
+        label='Час у дорозі', widget=forms.TimeInput(
             attrs={'class': 'form-control', }
         ))
     from_city = forms.ModelChoiceField(
