@@ -15,6 +15,12 @@
                   Найкоротший маршрут
                 </div>
             {% endif %}
+
+        <form action="{% url 'add_route' %}" method="post"> {% csrf_token %}
+            <input type="hidden" name="from_city" value="{{from_city.id}}">
+            <input type="hidden" name="to_city" value="{{to_city.id}}">
+            <input type="hidden" name="total_time" value="{{route.total_time.seconds}}">
+            <input type="hidden" name="trains" value="{% for train in route.trains %}{{train.id}},{% endfor %}">
             <h5>Час у дорозі {{route.total_time|format_duration}}</h5>
             <table class="table">
                 <thead>
@@ -32,6 +38,8 @@
             {% endfor %}
                 </tbody>
             </table>
+            <button type="submit" class="btn btn-outline-success">Зберегти</button>
+            </form>
             <br><br>
         {% endfor %}
     </div>

@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from routes.forms import RouteForm
 
-__all__ = ('home', 'find_routes')
+__all__ = ('home', 'find_routes', 'add_route')
 
 from routes.utils import get_all_routes
 
@@ -27,4 +27,14 @@ def find_routes(request):
         return render(request, 'routes/home.html', {'form': form})
     else:
         messages.error(request, 'Немає даних для пошуку')
+        return HttpResponseRedirect('/')
+
+
+def add_route(request):
+    if request.method == 'POST':
+        data = request.POST
+        a =  1
+        return render(request, 'routes/create.html', {})
+    else:
+        messages.error(request, 'Немає даних для збереження')
         return HttpResponseRedirect('/')
