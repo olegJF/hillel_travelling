@@ -1,6 +1,8 @@
-from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+
+User = get_user_model()
 
 
 class Route(models.Model):
@@ -19,6 +21,10 @@ class Route(models.Model):
         verbose_name='До якого міста'
     )
     trains = models.ManyToManyField('trains.Train', verbose_name='Список поїздів')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, verbose_name='Користувач',
+        null=True, blank=True
+    )
 
     def __str__(self):
         return self.name
