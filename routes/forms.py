@@ -30,7 +30,7 @@ class RouteModelForm(forms.ModelForm):
         label='Назва маршруту', widget=forms.TextInput(
             attrs={'class': 'form-control', 'placeholder': 'Назва маршруту'}
         ))
-    total_time = forms.DecimalField(widget=forms.HiddenInput())
+    total_time = forms.DurationField(widget=forms.HiddenInput())
     from_city = forms.ModelChoiceField(
         queryset=City.objects.all(), widget=forms.HiddenInput()
     )

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
 
-__all__ = ('home', 'find_routes', 'add_route')
+__all__ = ('home', 'find_routes', 'add_route', 'save_route')
 
 from routes.utils import get_all_routes
 from trains.models import Train
@@ -48,6 +48,23 @@ def add_route(request):
                 'to_city': cities[to_city_id], 'trains': qs
             }
         )
+        return render(request, 'routes/create.html', {'form': form})
+    else:
+        messages.error(request, 'Немає даних для збереження')
+        return HttpResponseRedirect('/')
+
+
+def save_route(request):
+    if request.method == 'POST':
+        form = RouteModelForm(request.POST)
+        if form.is_valid():
+            qs = form.cleaned_data['trains']
+            route = form.save()
+            route.user_id = request.user.id
+            route.trains.set(qs)
+            route.save()
+            messages.success(request, 'Маршрут збережено')
+            return HttpResponseRedirect('/')
         return render(request, 'routes/create.html', {'form': form})
     else:
         messages.error(request, 'Немає даних для збереження')
