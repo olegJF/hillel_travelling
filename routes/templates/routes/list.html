@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Маршрути{% endblock %}
+{% block content %}
+<h1 class="text-center my-2">Маршрути</h1>
+<div class="row">
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            {% for object in page_obj %}
+            <tr>
+                <td>
+                    <a href="">
+                    {{object.name}}
+                    </a>
+                </td>
+                <td>
+                    <a href="">
+                    <button type="button" class="btn btn-outline-danger btn-sm">Видалити</button>
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for page in page_obj.paginator.page_range %}
+            <li class="page-item {% if page == page_obj.number%} active{% endif %}">
+                <a class="page-link" href="?page={{ page}}">
+                    {{page}}
+                </a>
+            </li>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+          </li>
+        {% endif %}
+
+    </ul>
+</nav>
+
+{% endblock %}
+
+

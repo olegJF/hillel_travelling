@@ -1,14 +1,15 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
-
-__all__ = ('home', 'find_routes', 'add_route', 'save_route')
-
+from routes.models import Route
 from routes.utils import get_all_routes
 from trains.models import Train
+
+__all__ = ('home', 'find_routes', 'add_route', 'save_route', 'RouteListView')
 
 
 def home(request):
@@ -69,3 +70,13 @@ def save_route(request):
     else:
         messages.error(request, 'Немає даних для збереження')
         return HttpResponseRedirect('/')
+
+
+class RouteListView(ListView):
+    model = Route
+    template_name = 'routes/list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user_id=self.request.user.id)
