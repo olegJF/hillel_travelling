@@ -19,7 +19,7 @@
                 <td>{{object.from_city}}</td>
                 <td>{{object.to_city}}</td>
                 <td>
-                    <a href="">
+                    <a href="{% url 'delete' pk=object.id %}">
                     <button type="button" class="btn btn-outline-danger btn-sm">Видалити</button>
                     </a>
                 </td>

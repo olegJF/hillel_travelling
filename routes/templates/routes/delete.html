@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Видалення маршруту{% endblock %}
+{% block content %}
+<h1>Видалення маршруту</h1>
+
+<h4>Ви дійсно бажаєте видалити маршрут {{object}}?</h4>
+
+{% include 'form.html' with text='Видалити' klass='danger'%}
+
+{% endblock %}

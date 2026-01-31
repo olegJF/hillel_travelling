@@ -12,7 +12,7 @@ from trains.models import Train
 
 __all__ = (
     'home', 'find_routes', 'add_route', 'save_route', 'RouteListView',
-    'RouteDetailView',
+    'RouteDetailView', 'RouteDeleteView',
 )
 
 
@@ -104,11 +104,15 @@ class RouteDeleteView(DeleteView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        success_message = self.get_success_message({'number': self.object.number})
+        success_message = self.get_success_message({'name': self.object.name})
         if success_message:
             messages.success(self.request, success_message)
         return response
 
     def get_success_message(self, cleaned_data):
-        message = 'Поїзд {number} успішно видалено'
+        message = 'Маршрут {name} успішно видалено'
         return message.format(**cleaned_data)
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user_id=self.request.user.id)
