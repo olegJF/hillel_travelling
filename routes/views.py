@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -37,6 +39,7 @@ def find_routes(request):
         return HttpResponseRedirect('/')
 
 
+@login_required
 def add_route(request):
     if request.method == 'POST':
         data = request.POST
@@ -59,6 +62,7 @@ def add_route(request):
         return HttpResponseRedirect('/')
 
 
+@login_required
 def save_route(request):
     if request.method == 'POST':
         form = RouteModelForm(request.POST)
@@ -76,7 +80,7 @@ def save_route(request):
         return HttpResponseRedirect('/')
 
 
-class RouteListView(ListView):
+class RouteListView(LoginRequiredMixin, ListView):
     model = Route
     template_name = 'routes/list.html'
     paginate_by = 10
@@ -87,7 +91,7 @@ class RouteListView(ListView):
             'from_city', 'to_city')
 
 
-class RouteDetailView(DetailView):
+class RouteDetailView(LoginRequiredMixin, DetailView):
     model = Route
     template_name = 'routes/detail.html'
 
@@ -97,7 +101,7 @@ class RouteDetailView(DetailView):
             'from_city', 'to_city')
 
 
-class RouteDeleteView(DeleteView):
+class RouteDeleteView(LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('list')

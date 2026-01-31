@@ -38,7 +38,9 @@
             {% endfor %}
                 </tbody>
             </table>
+            {% if user.is_authenticated %}
             <button type="submit" class="btn btn-outline-success">Зберегти</button>
+            {% endif %}
             </form>
             <br><br>
         {% endfor %}
