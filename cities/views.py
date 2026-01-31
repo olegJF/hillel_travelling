@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -56,6 +57,21 @@ class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         message = 'Місто {name} успішно створено'
         return message.format(**cleaned_data)
 
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+
 class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = City
     template_name = 'cities/update.html'
@@ -65,6 +81,20 @@ class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     def get_success_message(self, cleaned_data):
         message = 'Місто {name} успішно відредаговано'
         return message.format(**cleaned_data)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
 
 
 class CityDeleteView(LoginRequiredMixin, DeleteView):
@@ -82,3 +112,17 @@ class CityDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_message(self, cleaned_data):
         message = 'Місто {name} успішно видалено'
         return message.format(**cleaned_data)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)

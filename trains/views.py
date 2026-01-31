@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView,
@@ -36,6 +37,21 @@ class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         message = 'Поїзд {number} успішно створено'
         return message.format(**cleaned_data)
 
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+
 class TrainUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Train
     template_name = 'trains/update.html'
@@ -45,6 +61,20 @@ class TrainUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     def get_success_message(self, cleaned_data):
         message = 'Поїзд {number} успішно відредаговано'
         return message.format(**cleaned_data)
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
 
 
 class TrainDeleteView(LoginRequiredMixin, DeleteView):
@@ -62,3 +92,17 @@ class TrainDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_message(self, cleaned_data):
         message = 'Поїзд {number} успішно видалено'
         return message.format(**cleaned_data)
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            messages.error(self.request, 'Ви не можете цього робити')
+            return HttpResponseRedirect('/')
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
