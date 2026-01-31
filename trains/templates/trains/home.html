@@ -12,8 +12,10 @@
                 <th>Час у дорозі</th>
                 <th>Звідки</th>
                 <th>Куди</th>
+                 {% if user.is_superuser%}
                 <th>--</th>
                 <th>--</th>
+                 {% endif %}
             </tr>
             {% for object in page_obj %}
             <tr>
@@ -25,6 +27,7 @@
                 <td>{{object.travel_time|format_duration}}</td>
                 <td>{{object.from_city}}</td>
                 <td>{{object.to_city}}</td>
+                 {% if user.is_superuser%}
                 <td>
                     <a href="{% url 'trains:update' pk=object.id%}">
                     <button type="button" class="btn btn-outline-success btn-sm">Редагувати</button>
@@ -35,6 +38,7 @@
                     <button type="button" class="btn btn-outline-danger btn-sm">Видалити</button>
                     </a>
                 </td>
+                 {% endif %}
             </tr>
 
             {% endfor %}

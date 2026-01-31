@@ -32,7 +32,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'list' %}">Маршрути</a>
                 </li>
-                <li class="nav-item dropdown">
+                   {% if user.is_superuser%}
+
+                  <li class="nav-item dropdown">
 
                   <a class="nav-link dropdown-toggle
                     {% if request.path == trains_create_url or request.path == cities_create_url%}
@@ -46,6 +48,12 @@
                     <li><a class="dropdown-item" href="{% url 'trains:create' %}">Потягу</a></li>
                   </ul>
                 </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link disabled" aria-disabled="true">Створення</a>
+                    </li>
+
+                   {% endif %}
                   {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'accounts:logout' %}">Вийти</a>

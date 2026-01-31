@@ -12,6 +12,7 @@
                     {{object.name}}
                     </a>
                 </td>
+                {% if user.is_superuser%}
                 <td>
                     <a href="{% url 'cities:update' pk=object.id%}">
                     <button type="button" class="btn btn-outline-success btn-sm">Редагувати</button>
@@ -22,6 +23,7 @@
                     <button type="button" class="btn btn-outline-danger btn-sm">Видалити</button>
                     </a>
                 </td>
+                 {% endif %}
             </tr>
 
             {% endfor %}
