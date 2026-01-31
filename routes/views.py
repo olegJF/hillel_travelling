@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
@@ -9,7 +10,10 @@ from routes.models import Route
 from routes.utils import get_all_routes
 from trains.models import Train
 
-__all__ = ('home', 'find_routes', 'add_route', 'save_route', 'RouteListView')
+__all__ = (
+    'home', 'find_routes', 'add_route', 'save_route', 'RouteListView',
+    'RouteDetailView',
+)
 
 
 def home(request):
@@ -79,4 +83,32 @@ class RouteListView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(user_id=self.request.user.id)
+        return qs.filter(user_id=self.request.user.id).select_related(
+            'from_city', 'to_city')
+
+
+class RouteDetailView(DetailView):
+    model = Route
+    template_name = 'routes/detail.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user_id=self.request.user.id).select_related(
+            'from_city', 'to_city')
+
+
+class RouteDeleteView(DeleteView):
+    model = Route
+    template_name = 'routes/delete.html'
+    success_url = reverse_lazy('list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        success_message = self.get_success_message({'number': self.object.number})
+        if success_message:
+            messages.success(self.request, success_message)
+        return response
+
+    def get_success_message(self, cleaned_data):
+        message = 'Поїзд {number} успішно видалено'
+        return message.format(**cleaned_data)

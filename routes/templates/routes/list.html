@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Маршрути{% endblock %}
 {% block content %}
+{% load formatters %}
 <h1 class="text-center my-2">Маршрути</h1>
 <div class="row">
     <div class="col-md-8 mx-auto my-2">
@@ -8,20 +9,22 @@
             {% for object in page_obj %}
             <tr>
                 <td>
-                    <a href="">
+                    <a href="{% url 'detail' pk=object.id%}">
                     {{object.name}}
                     </a>
                 </td>
                 <td>
-                    <a href="">
-                    <button type="button" class="btn btn-outline-danger btn-sm">Видалити</button>
-                    </a>
+                    {{object.total_time|format_duration}}
+                </td>
+                <td>
+                    {{object.from_city}}
+                </td>
+                <td>
+                    {{object.to_city}}
                 </td>
             </tr>
-
             {% endfor %}
         </table>
-
     </div>
 </div>
 
