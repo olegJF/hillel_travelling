@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Помилка 500{% endblock %}
+{% block content %}
+<h1>Населений пункт</h1>
+<div class="row">
+    <h1 class="text-center">Помилка Серверу 500</h1>
+</div>
+<a href="{% url 'home' %}">
+    <button type="button" class="btn btn-outline-secondary">Назад</button>
+</a>
+{% endblock %}
