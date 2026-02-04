@@ -1,0 +1,544 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$crOgdDLywpKQ5c99NvcMww$7R9seRxQpFJQwf3YA6L8oHhCDb//CxBVpZkCamaWeLo=",
+    "last_login": "2026-01-31T14:34:44.711Z",
+    "is_superuser": true,
+    "username": "oleg",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-01-27T18:32:46.124Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$1PikwmT0uXvnqmId9P7EkI$4RDhFtWLpzfsw5+jgun0qk28aOyh6lcrWJq5a3w1RrU=",
+    "last_login": "2026-02-03T16:24:44.888Z",
+    "is_superuser": false,
+    "username": "qwerty",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-28T19:08:22.114Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 3,
+  "fields": {
+    "name": "Одеса"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 7,
+  "fields": {
+    "name": "Луцьк"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 8,
+  "fields": {
+    "name": "Харків"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 12,
+  "fields": {
+    "name": "Суми"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 13,
+  "fields": {
+    "name": "Херсон"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 14,
+  "fields": {
+    "name": "Миколаїв"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 20,
+  "fields": {
+    "name": "Київ"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 25,
+  "fields": {
+    "name": "Ковель"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 35,
+  "fields": {
+    "name": "Вінниця"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 37,
+  "fields": {
+    "name": "Дніпро"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 38,
+  "fields": {
+    "name": "Чернівці"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 39,
+  "fields": {
+    "name": "Полтава"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 40,
+  "fields": {
+    "name": "Донецьк"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 41,
+  "fields": {
+    "name": "Львів"
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 9,
+  "fields": {
+    "name": "ert1",
+    "total_time": "21:30:00",
+    "from_city": 35,
+    "to_city": 37,
+    "user": 1,
+    "trains": [
+      5,
+      26,
+      33
+    ]
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 10,
+  "fields": {
+    "name": "For qwerty",
+    "total_time": "01:30:00",
+    "from_city": 20,
+    "to_city": 38,
+    "user": 3,
+    "trains": [
+      11,
+      12,
+      14
+    ]
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 5,
+  "fields": {
+    "number": "12-2",
+    "travel_time": "12:00:00",
+    "from_city": 35,
+    "to_city": 14
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 9,
+  "fields": {
+    "number": "345",
+    "travel_time": "10:00:00",
+    "from_city": 20,
+    "to_city": 13
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 10,
+  "fields": {
+    "number": "КоКи111",
+    "travel_time": "07:00:00",
+    "from_city": 25,
+    "to_city": 20
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 11,
+  "fields": {
+    "number": "КиКо112",
+    "travel_time": "08:00:00",
+    "from_city": 20,
+    "to_city": 25
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 12,
+  "fields": {
+    "number": "КоЛ10",
+    "travel_time": "05:00:00",
+    "from_city": 25,
+    "to_city": 41
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 13,
+  "fields": {
+    "number": "ЧЛ101",
+    "travel_time": "11:00:00",
+    "from_city": 38,
+    "to_city": 41
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 14,
+  "fields": {
+    "number": "ЛЧ102",
+    "travel_time": "12:30:00",
+    "from_city": 41,
+    "to_city": 38
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 15,
+  "fields": {
+    "number": "ЛК001",
+    "travel_time": "08:00:00",
+    "from_city": 41,
+    "to_city": 20
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 16,
+  "fields": {
+    "number": "ЛВ234",
+    "travel_time": "06:00:00",
+    "from_city": 41,
+    "to_city": 35
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 17,
+  "fields": {
+    "number": "ВО345",
+    "travel_time": "09:24:00",
+    "from_city": 35,
+    "to_city": 3
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 18,
+  "fields": {
+    "number": "КиЛ001",
+    "travel_time": "08:00:00",
+    "from_city": 20,
+    "to_city": 41
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 19,
+  "fields": {
+    "number": "КиВ145",
+    "travel_time": "04:00:00",
+    "from_city": 20,
+    "to_city": 35
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 20,
+  "fields": {
+    "number": "КиО100",
+    "travel_time": "11:00:00",
+    "from_city": 20,
+    "to_city": 3
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 21,
+  "fields": {
+    "number": "КиМ222",
+    "travel_time": "15:00:00",
+    "from_city": 20,
+    "to_city": 14
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 22,
+  "fields": {
+    "number": "КиП342",
+    "travel_time": "04:18:00",
+    "from_city": 20,
+    "to_city": 39
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 23,
+  "fields": {
+    "number": "КиС990",
+    "travel_time": "16:30:00",
+    "from_city": 20,
+    "to_city": 12
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 24,
+  "fields": {
+    "number": "КиХ001",
+    "travel_time": "10:30:00",
+    "from_city": 20,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 25,
+  "fields": {
+    "number": "МиО124",
+    "travel_time": "06:00:00",
+    "from_city": 14,
+    "to_city": 3
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 26,
+  "fields": {
+    "number": "МиХ1101",
+    "travel_time": "03:00:00",
+    "from_city": 14,
+    "to_city": 13
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 27,
+  "fields": {
+    "number": "ХМи110",
+    "travel_time": "05:00:00",
+    "from_city": 13,
+    "to_city": 14
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 28,
+  "fields": {
+    "number": "ПХа101",
+    "travel_time": "06:00:00",
+    "from_city": 39,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 29,
+  "fields": {
+    "number": "ПДн135",
+    "travel_time": "05:00:00",
+    "from_city": 39,
+    "to_city": 37
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 30,
+  "fields": {
+    "number": "ДнХ343",
+    "travel_time": "08:30:00",
+    "from_city": 37,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 31,
+  "fields": {
+    "number": "ДнХе371",
+    "travel_time": "09:00:00",
+    "from_city": 37,
+    "to_city": 13
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 32,
+  "fields": {
+    "number": "ДнДо214",
+    "travel_time": "07:24:00",
+    "from_city": 37,
+    "to_city": 40
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 33,
+  "fields": {
+    "number": "ХеДн2456",
+    "travel_time": "06:30:00",
+    "from_city": 13,
+    "to_city": 37
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 34,
+  "fields": {
+    "number": "ХаП1345",
+    "travel_time": "07:00:00",
+    "from_city": 8,
+    "to_city": 39
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 35,
+  "fields": {
+    "number": "ХаС231",
+    "travel_time": "06:00:00",
+    "from_city": 8,
+    "to_city": 12
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 36,
+  "fields": {
+    "number": "ХаДо2378",
+    "travel_time": "11:00:00",
+    "from_city": 8,
+    "to_city": 40
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 37,
+  "fields": {
+    "number": "ХаДн289",
+    "travel_time": "09:12:00",
+    "from_city": 8,
+    "to_city": 37
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 38,
+  "fields": {
+    "number": "ДоДн111",
+    "travel_time": "10:24:00",
+    "from_city": 40,
+    "to_city": 37
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 39,
+  "fields": {
+    "number": "ДоХа456",
+    "travel_time": "12:12:00",
+    "from_city": 40,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 40,
+  "fields": {
+    "number": "СКи001",
+    "travel_time": "09:00:00",
+    "from_city": 12,
+    "to_city": 20
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 41,
+  "fields": {
+    "number": "СХа987",
+    "travel_time": "06:00:00",
+    "from_city": 12,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 42,
+  "fields": {
+    "number": "КиХа008",
+    "travel_time": "13:12:00",
+    "from_city": 20,
+    "to_city": 8
+  }
+},
+{
+  "model": "trains.train",
+  "pk": 44,
+  "fields": {
+    "number": "ВіХ",
+    "travel_time": "14:04:00",
+    "from_city": 35,
+    "to_city": 13
+  }
+},
+{
+  "model": "trains.traintest",
+  "pk": 1,
+  "fields": {
+    "number": "2",
+    "from_city": 35
+  }
+},
+{
+  "model": "trains.traintest",
+  "pk": 2,
+  "fields": {
+    "number": "92",
+    "from_city": 35
+  }
+}
+]

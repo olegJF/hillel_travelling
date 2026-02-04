@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-wv#(gb8#s4(l4$&lplc)9+fmy#ppn%4z7u0*bb@+9i&@yb4-d8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['hilleltravelling-olegjf7198-csu2u5oo.leapcell.dev']
 
 
 # Application definition
