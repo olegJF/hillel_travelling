@@ -61,14 +61,14 @@ class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         if not request.user.is_superuser:
             messages.error(self.request, 'Ви не можете цього робити')
             return HttpResponseRedirect('/')
-        self.object = self.get_object()
+        self.object = None
         return super().post(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_superuser:
             messages.error(self.request, 'Ви не можете цього робити')
             return HttpResponseRedirect('/')
-        self.object = self.get_object()
+        self.object = None
         return super().get(request, *args, **kwargs)
 
 
