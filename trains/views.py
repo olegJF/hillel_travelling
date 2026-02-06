@@ -41,14 +41,12 @@ class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         if not request.user.is_superuser:
             messages.error(self.request, 'Ви не можете цього робити')
             return HttpResponseRedirect('/')
-        self.object = self.get_object()
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_superuser:
             messages.error(self.request, 'Ви не можете цього робити')
             return HttpResponseRedirect('/')
-        self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
 

@@ -24,11 +24,11 @@ class Train(models.Model):
     )
 
     def clean(self):
-        if self.from_city == self.to_city:
+        if self.from_city_id == self.to_city_id:
             raise ValidationError(
                 'Потяг не може приходити до того міста з якого вийшов')
         qs = Train.objects.filter(
-            from_city=self.from_city, to_city=self.to_city,
+            from_city_id=self.from_city_id, to_city_id=self.to_city_id,
             travel_time=self.travel_time).exclude(pk=self.pk)
         if qs.exists():
             raise ValidationError(
@@ -48,7 +48,7 @@ class Train(models.Model):
         ordering = ['number']
 
     def get_absolute_url(self):
-        return reverse('cities:detail', kwargs={'pk': self.pk})
+        return reverse('trains:detail', kwargs={'pk': self.pk})
 
 
 class TrainTest(models.Model):
