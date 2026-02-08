@@ -25,6 +25,7 @@ def get_graph(qs) -> dict:
         graph[q.from_city_id].add(q.to_city_id)
     return graph
 
+
 def get_all_routes(request, form) -> dict:
     qs = Train.objects.all().order_by('travel_time').select_related('from_city', 'to_city')
     graph = get_graph(qs)
@@ -59,7 +60,7 @@ def get_all_routes(request, form) -> dict:
             train = train_list[0]
             tmp['trains'].append(train)
             tmp['total_time'] += train.travel_time
-        if tmp['total_time'].seconds // 3600 <= expected_time:
+        if tmp['total_time'].total_seconds() // 3600 <  expected_time:
             routes.append(tmp)
     if not routes:
         raise ValueError('Маршрут за такий час неможливий')

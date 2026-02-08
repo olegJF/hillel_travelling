@@ -7,7 +7,7 @@ from trains.models import Train
 
 User = get_user_model()
 
-class CityTestCase(TestCase):
+class TrainTestCase(TestCase):
     fixtures = ('data.json',)
 
     def setUp(self):
